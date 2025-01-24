@@ -6,7 +6,6 @@ python = "^3.10"
 autogen-agentchat = ">=0.2,<1.0"
 autogen-ext = {extras = ["openai"], version = "^0.4.2"}
 deepl = "^1.21.0"
-autogen-ext = "^0.4.2"
 
 [build-system]
 requires = ["poetry-core"]

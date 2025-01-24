@@ -1,8 +1,20 @@
-from autogen_agentchat.agents import UserProxyAgent
+# from autogen_agentchat.agents import UserProxyAgent
+from data.prompts import SUPERVISOR_PROMPT
 
-system_message="You are the supervisor managing a workflow. Your role is to assign tasks to other agents (translation_agent and sentiment_analyst_agent) to fulfill user's requests. Your role is to assign tasks to other agents (translation_agent and sentiment_analyst_agent) step-by-step to fulfill the user's requests. Whenever the agent gives you back their results, decide what to do with them next based on user's prompt. Make sure that you are the last agent to speak and that you print out the results of both tasks: sentiment analysis and translation."
+# system_message=SUPERVISOR_PROMPT
 
-supervisor_agent = UserProxyAgent(
-    name="supervisor_agent"
-    
+# SUPERVISOR_AGENT = UserProxyAgent(
+#     name="supervisor"
+# )
+
+from autogen_agentchat.agents import AssistantAgent
+from autogen_ext.models.openai import OpenAIChatCompletionClient
+
+SUPERVISOR_AGENT = AssistantAgent(
+    name="supervisor",
+    model_client=OpenAIChatCompletionClient(
+        model="gpt-4o"
+    ),
+    description="An agent that manages tasks based on a plan provided by the PLANNER.",
+    system_message=SUPERVISOR_PROMPT
 )

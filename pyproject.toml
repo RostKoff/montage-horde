@@ -3,7 +3,10 @@ package-mode=false
 
 [tool.poetry.dependencies]
 python = "^3.10"
-autogen-agentchat = ">=0.2,<1.0"
+autogen-agentchat = "^0.2"
+flaml = "^2.3.3"
+openai = "^1.59.9"
+
 
 [build-system]
 requires = ["poetry-core"]

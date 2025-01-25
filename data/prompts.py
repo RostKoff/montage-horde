@@ -114,7 +114,7 @@ INFORMATION_EXTRACTOR_PROMPT = (
     "### TASK ###"
     "When you will get a task from the SUPERVISOR you should extract valuable information for your colleges."
     "If the task requires only overall video content analysis, use transcription with segment precision."
-    "If the task requires modifications to be made on a video or some precise information to be extracted, use transcription with word precision."
+    "If the task requires modifications to be made on a video, speaker diarization or some precise information to be extracted, use transcription with word precision."
     "Use only tools provided to you."
     "When using tools set only needed and known arguments."
 )

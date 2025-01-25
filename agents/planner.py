@@ -1,4 +1,4 @@
-from autogen_agentchat.agents import AssistantAgent, UserProxyAgent
+from autogen_agentchat.agents import AssistantAgent
 from autogen_ext.models.openai import OpenAIChatCompletionClient
 from data.prompts import PLANNER_PROMPT
 

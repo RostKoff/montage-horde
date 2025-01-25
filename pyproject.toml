@@ -6,6 +6,10 @@ python = "^3.10"
 autogen-agentchat = ">=0.2,<1.0"
 autogen-ext = {extras = ["openai"], version = "^0.4.2"}
 deepl = "^1.21.0"
+python-dotenv = "^1.0.1"
+autogen-ext = {extras = ["docker", "openai"], version = "^0.4.3"}
+asyncio-atexit = "^1.0.1"
+gradio = "^5.13.0"
 
 [build-system]
 requires = ["poetry-core"]

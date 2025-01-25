@@ -1,6 +1,9 @@
 from autogen_agentchat.agents import AssistantAgent
 from autogen_ext.models.openai import OpenAIChatCompletionClient
 # from data.prompts import VALIDATOR_PROMPT
+import os
+from moviepy.editor import VideoFileClip
+from openai import OpenAI
 
 VALIDATOR_PROMPT = (
     "### ROLE ###"
@@ -53,18 +56,37 @@ TRANSCRIPTION_2 = """
 """
 TRANSCRIPTION_3 = """"""
 
-from openai import OpenAI
 
-client = OpenAI()
+def inputter(*file_names, description=None):
+    client = OpenAI()
+    transcription_dict = {}
+    for file_name in file_names:
+        if file_name.endswith(".mp4"):
+            mp3_file = os.path.splitext(file_name)[0] + ".mp3"
+            try:
+                video = VideoFileClip(file_name)
+                video.audio.write_audiofile(mp3_file)
+                print(f"Conversion successful! {file_name} -> {mp3_file}")
+            except Exception as e:
+                print(f"Failed to convert {file_name}: {e}")
+        
+        audio_file  = open(f"data/{mp3_file}", "rb")
+        
+        transcription = client.audio.transcriptions.create(
+            model="whisper-1", 
+            file=audio_file,
+            response_format="text"
+        )
+        transcription_dict[file_name] = transcription
 
-audio_file  = open("data/audio_4.mp3", "rb")
+        transcription_string = "\n".join(
+            f"{file_name}: {transcription}" for file_name, transcription in transcription_dict.items()
+        )
 
-TRANSCRIPTION = client.audio.transcriptions.create(
-    model="whisper-1", 
-    file=audio_file,
-    response_format="text"
-)
+    return transcription_string, description
+    
 
+DESCRIPTION = "OPIS FILMU np timestampy, recenzja czy streszczenie"
 from autogen_agentchat.messages import TextMessage
 from autogen_core import CancellationToken
 import asyncio
@@ -79,11 +101,12 @@ async def invoke_validator_agent(task_description: str):
     return response
 
 async def main():
-    task_description = (f"Translate this video to the english without any curses. video: {TRANSCRIPTION}")
+    transcription, description = inputter("audio_4.mp3", pho, description=DESCRIPTION)
+    task_description = (f"Translate this videos to the english without any curses. videos: {transcription} and decription: {description}")
     response = await invoke_validator_agent(task_description)
     print("Agent Response:", response.chat_message.content)
 
 
 if __name__ == "__main__":
     asyncio.run(main())
-    print("\n\n"+TRANSCRIPTION)
+    print("\n\n"+"succes")

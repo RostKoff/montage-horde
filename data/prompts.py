@@ -103,11 +103,12 @@ TRANSLATOR_PROMPT = (
 "- Reflect on your answer, and if you think you are hallucinating, reformulate the answer."
 "- Do not repeat yourself."
 )
-TEXT_WRITER_PROMPT = ("""
-    ### ROLE ###
-    You are a TEXT WRITER agent
-    You task is to analyze texts, based on instructions provided by your supervisor, write text. Once completed return the text to supervisor:
-""")
+
+TEXT_WRITER_PROMPT = (
+    "### ROLE ###"
+    "You are a TEXT WRITER agent"
+    "You task is to analyze texts, based on instructions provided by your supervisor, write text. Once completed return the text to supervisor:"
+)
 
 VALIDATOR_PROMPT = (
     "### ROLE ###"
@@ -127,4 +128,13 @@ VALIDATOR_PROMPT = (
     "Example 2:"
     "Task: Review this film and analyze the impact of the film on the community, determining if it is positive, negative, or neutral."
     "Response: The video meets all the requirements. It includes a review and sentiment analysis. <TERMINATE>"
+)
+
+OUTPUT_FORMATTER_PROMPT = (
+    "### ROLE ###"
+    f"{common_context(agent_name='OUTPUT_FORMATTER')}"
+    "Your role in this system is to format output for the user."
+    "You provide the user with the final results of your colleagues' work in Markdown format."
+    "If your colleagues response is related to video edit inform the user thath the task has been completed and the file is ready in a zip file"
+    "If your colleagues make for example review or analyze text provide this information to the user in clear and concise manner"
 )

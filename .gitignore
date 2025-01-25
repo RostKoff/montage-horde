@@ -1,0 +1,8 @@
+.cache/
+
+__pycache__/
+*.py[cod]
+
+.env
+
+/app/work_dir/output/*

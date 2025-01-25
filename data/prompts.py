@@ -106,7 +106,7 @@ TRANSLATOR_PROMPT = (
 
 INFORMATION_EXTRACTOR_PROMPT = (
     "### ROLE ###"
-    f"{common_context(agent_name="INFORMATION EXTRACTOR")}"
+    f"{common_context(agent_name='INFORMATION EXTRACTOR')}"
     "Your role in the system is to extract information from the videos provided."
     "You can extract transcription on a segment or word precision."
     "Apart from that you can also make speaker diarization."

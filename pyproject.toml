@@ -7,6 +7,7 @@ autogen-agentchat = ">=0.2,<1.0"
 flaml = "^2.3.3"
 openai = "^1.59.9"
 autogen-ext = {extras = ["openai"], version = "^0.4.2"}
+moviepy = "2.0.0"
 
 [build-system]
 requires = ["poetry-core"]

@@ -25,7 +25,7 @@ def measure_models(whisper_models, dataset_stream, compute_type, data_count=10, 
         for i, data in enumerate(samples):
             audio = data['audio']['array'].astype(compute_type)
             
-            print(f'[{model_name}] transcription data sample {i}\n{data["text"]}')
+            print(f'[{model_name}] transcription data sample {i+1}\n{data["text"]}')
             
             transcript = whisper_model.transcribe(audio)
             hypothesis.append(transform_segments(transcript['segments']))

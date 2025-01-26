@@ -103,11 +103,27 @@ TRANSLATOR_PROMPT = (
 "- Reflect on your answer, and if you think you are hallucinating, reformulate the answer."
 "- Do not repeat yourself."
 )
-TEXT_WRITER_PROMPT = ("""
-    ### ROLE ###
-    You are a TEXT WRITER agent
-    You task is to analyze texts, based on instructions provided by your supervisor, write text. Once completed return the text to supervisor:
-""")
+
+INFORMATION_EXTRACTOR_PROMPT = (
+    "### ROLE ###"
+    f"{common_context(agent_name='INFORMATION EXTRACTOR')}"
+    "Your role in the system is to extract information from the videos provided."
+    "You can extract transcription on a segment or word precision."
+    "Apart from that you can also make speaker diarization."
+    "You will a task and videos from your college SUPERVISOR."
+    "### TASK ###"
+    "When you will get a task from the SUPERVISOR you should extract valuable information for your colleges."
+    "If the task requires only overall video content analysis, use transcription with segment precision."
+    "If the task requires modifications to be made on a video, speaker diarization or some precise information to be extracted, use transcription with word precision."
+    "Use only tools provided to you."
+    "When using tools set only needed and known arguments."
+)
+
+TEXT_WRITER_PROMPT = (
+    "### ROLE ###"
+    f'{common_context(agent_name="TEXT WRITER")}'
+    "You task is to analyze texts, based on instructions provided by your supervisor, write text. Once completed return the text to supervisor:"
+)
 
 VALIDATOR_PROMPT = (
     "### ROLE ###"

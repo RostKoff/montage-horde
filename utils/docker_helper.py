@@ -2,15 +2,17 @@ from autogen_ext.code_executors.docker import DockerCommandLineCodeExecutor
 from utils.io_helper import IOHelper
 
 class DockerHelper():
-    def __init__(self, io_helper: IOHelper, timeout: int):
+    def __init__(self, io_helper: IOHelper, timeout: int, docker_image="python:3-slim"):
         self.io_helper = io_helper
         self.timeout = timeout
         self.code_executor = None
+        self.docker_image=docker_image
         
     async def initialize(self, gradio_files):
         self.io_helper.init_work_dir(gradio_files)
         
-        self.code_executor = DockerCommandLineCodeExecutor( 
+        self.code_executor = DockerCommandLineCodeExecutor(
+            image=self.docker_image,
             work_dir=self.io_helper.work_dir.name,
             timeout=self.timeout,
             auto_remove=True,

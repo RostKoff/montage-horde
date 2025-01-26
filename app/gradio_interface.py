@@ -23,6 +23,9 @@ def gradio_app():
         
         with gr.Group(visible=False) as results_section:
             gr.Markdown("## Results and Feedback")
+            result_output = gr.Textbox(
+                label="Results", interactive=False
+            )
             download_file = gr.File(
                 label="Download Processed Files",
                 interactive=True
@@ -35,18 +38,13 @@ def gradio_app():
             back_button = gr.Button("Start New Request")
 
         def process_and_update(files, prompt):
-            output_files = asyncio.run(process_request(files, prompt))
-
-            if isinstance(output_files, str):
-                output_files = [output_files]
-            
-            zip_file_path = os.path.abspath('app/work_dir/output/generate_test.zip')
-            output_files.append(zip_file_path)
-
+            (result, zipped_file) = asyncio.run(process_request(files, prompt))
+            output = result.messages[-1].content
             return (
                 gr.update(visible=False),
-                gr.update(value=zip_file_path, visible=True),
-                gr.update(visible=True), 
+                gr.update(value=zipped_file, visible=True),
+                gr.update(visible=True),
+                gr.update(value=result.messages[-1].content) 
             )
 
         def refine_request(new_prompt):
@@ -66,7 +64,7 @@ def gradio_app():
         submit_button.click(
             process_and_update,
             inputs=[file_input, prompt_input],
-            outputs=[form_section, download_file, results_section],
+            outputs=[form_section, download_file, results_section, result_output],
         )
 
         refine_button.click(

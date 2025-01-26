@@ -4,7 +4,10 @@ package-mode=false
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"
 autogen-agentchat = ">=0.2,<1.0"
+<<<<<<< HEAD
 asyncio-atexit = "^1.0.1"
+=======
+>>>>>>> gradio
 deepl = "^1.21.0"
 python-dotenv = "^1.0.1"
 autogen-ext = {extras = ["docker", "openai"], version = "^0.4.3"}

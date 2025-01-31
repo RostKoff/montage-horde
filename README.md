@@ -25,3 +25,7 @@ HF_AUTH_TOKEN=your_code
 6. Run gradio_interface.py in your project environment, then proceed to your browser with the link *http://127.0.0.1:7860*.
 7. From there, you can upload audio and video files to process, and enter a prompt to orchestrate the task.
 8. Wait until the app processes your request (it may take up a few minutes) - the interface will be replaced and result displayed in "results" field with attached output zip file. All files generated during request processing are kept there.
+
+## Metrics
+
+Transcription metrics in jiwet for three different Whisperx models can be found in evaluation package on transcription-metrics branch. 
